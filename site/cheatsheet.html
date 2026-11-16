@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<script>/* Set the theme before the first paint so a light page never flashes dark */
+(function(){try{var t=localStorage.getItem("netstart-theme");if(!t){t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheat sheet — NetStart</title>
+<meta name="description" content="One printable page of layers, ports, private ranges, commands and the TCP-versus-UDP trade-off.">
+<link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/style.css?v=20261106" rel="stylesheet">
+</head>
+<body data-page="cheatsheet">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="navbar navbar-expand-lg sticky-top no-print" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="HomePage.html">Net<span class="text-primary">Start</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="basics.html">Basics</a></li>
+        <li class="nav-item"><a class="nav-link" href="concepts.html">Core concepts</a></li>
+        <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" href="cheatsheet.html">Cheat sheet</a></li>
+        <li class="nav-item ms-lg-2">
+          <button class="btn btn-sm btn-outline-secondary" type="button" data-theme-toggle aria-pressed="false">
+            <span aria-hidden="true">☾</span><span class="visually-hidden">Switch theme</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="py-5 border-bottom" style="background: var(--surface);">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="small mb-2 no-print"><a href="HomePage.html">Home</a> <span class="text-secondary">/ Cheat sheet</span></nav>
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <h1 class="section-title display-6 mb-2">Cheat sheet</h1>
+        <p class="lede mb-0">Everything above, compressed onto one printable page.</p>
+      </div>
+      <button class="btn btn-outline-secondary no-print" type="button" onclick="window.print()">Print this page</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="py-5">
+  <div class="container">
+
+    <div class="row g-4">
+
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <h2 class="h5 mb-3">The layers, one line each</h2>
+          <div class="table-responsive">
+            <table class="table table-sm cheat mb-0">
+              <thead><tr><th>#</th><th>Layer</th><th>Does</th><th>Unit</th></tr></thead>
+              <tbody>
+                <tr><td>7</td><td>Application</td><td>HTTP, DNS, mail</td><td>message</td></tr>
+                <tr><td>6</td><td>Presentation</td><td>encoding, encryption</td><td>—</td></tr>
+                <tr><td>5</td><td>Session</td><td>keeps a conversation alive</td><td>—</td></tr>
+                <tr><td>4</td><td>Transport</td><td>ports, reliability</td><td>segment</td></tr>
+                <tr><td>3</td><td>Network</td><td>addressing, routing</td><td>packet</td></tr>
+                <tr><td>2</td><td>Data link</td><td>next hop, MAC</td><td>frame</td></tr>
+                <tr><td>1</td><td>Physical</td><td>cable, radio</td><td>bit</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <h2 class="h5 mb-3">Ports worth memorising</h2>
+          <div class="table-responsive">
+            <table class="table table-sm cheat mb-0">
+              <thead><tr><th>Port</th><th>Service</th><th>Transport</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">22</td><td>SSH</td><td>TCP</td></tr>
+                <tr><td class="mono">53</td><td>DNS</td><td>UDP (TCP for large replies)</td></tr>
+                <tr><td class="mono">80</td><td>HTTP</td><td>TCP</td></tr>
+                <tr><td class="mono">443</td><td>HTTPS</td><td>TCP</td></tr>
+                <tr><td class="mono">3306</td><td>MySQL</td><td>TCP</td></tr>
+                <tr><td class="mono">67 / 68</td><td>DHCP</td><td>UDP</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <h2 class="h5 mb-3">Addresses</h2>
+          <div class="table-responsive">
+            <table class="table table-sm cheat mb-0">
+              <thead><tr><th>Range</th><th>What it is</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">10.0.0.0/8</td><td>private</td></tr>
+                <tr><td class="mono">172.16.0.0/12</td><td>private</td></tr>
+                <tr><td class="mono">192.168.0.0/16</td><td>private</td></tr>
+                <tr><td class="mono">127.0.0.0/8</td><td>loopback (this machine)</td></tr>
+                <tr><td class="mono">169.254.0.0/16</td><td>link-local, usually "DHCP failed"</td></tr>
+                <tr><td class="mono">224.0.0.0/4</td><td>multicast</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <h2 class="h5 mb-3">TCP or UDP?</h2>
+          <div class="table-responsive">
+            <table class="table table-sm cheat mb-0">
+              <thead><tr><th></th><th>TCP</th><th>UDP</th></tr></thead>
+              <tbody>
+                <tr><td>Connection</td><td>handshake</td><td>none</td></tr>
+                <tr><td>Order</td><td>guaranteed</td><td>not guaranteed</td></tr>
+                <tr><td>Retransmit</td><td>yes</td><td>no</td></tr>
+                <tr><td>Overhead</td><td>higher</td><td>low</td></tr>
+                <tr><td>Use for</td><td>web, mail, files</td><td>DNS, voice, games</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <h2 class="h5 mb-3">Diagnostic commands</h2>
+          <div class="table-responsive">
+            <table class="table table-sm cheat mb-0">
+              <thead><tr><th>Command</th><th>Answers</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">ipconfig /all</td><td>What address, mask, gateway and DNS do I have?</td></tr>
+                <tr><td class="mono">ping host</td><td>Can I reach it, and how long does a round trip take?</td></tr>
+                <tr><td class="mono">tracert host</td><td>Which routers does the path go through?</td></tr>
+                <tr><td class="mono">nslookup name</td><td>What address does DNS return?</td></tr>
+                <tr><td class="mono">netstat -ano</td><td>Which ports are open, and by which process?</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-3 h-100">
+          <h2 class="h5 mb-3">HTTP status codes</h2>
+          <div class="table-responsive">
+            <table class="table table-sm cheat mb-0">
+              <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">200</td><td>OK</td></tr>
+                <tr><td class="mono">301 / 302</td><td>moved — follow the new location</td></tr>
+                <tr><td class="mono">404</td><td>the server has no such resource</td></tr>
+                <tr><td class="mono">500</td><td>the server failed handling the request</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small text-secondary mb-0 mt-3">
+            The first digit is the family: 2xx success, 3xx redirect, 4xx your request, 5xx their fault.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout mt-4 small">
+      <strong>Exam habit.</strong> When a question describes a fault, name the layer before you name the fix.
+      "Ping works, browsing fails" is not a cable problem; it is DNS or a port.
+    </div>
+
+    <div class="d-flex justify-content-between border-top pt-4 mt-5 no-print">
+      <a class="btn btn-outline-secondary" href="quiz.html">← Quiz</a>
+      <a class="btn btn-primary" href="HomePage.html">Back to home</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5 no-print">
+  <div class="container d-flex flex-wrap justify-content-between gap-2 small">
+    <span>NetStart — an HCI coursework prototype. No tracking, no accounts.</span>
+    <span><a href="https://getbootstrap.com/" target="_blank" rel="noopener">Built with Bootstrap 5</a></span>
+  </div>
+</footer>
+
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js?v=20261106"></script>
+</body>
+</html>
+

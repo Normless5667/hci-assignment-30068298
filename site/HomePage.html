@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<script>/* Set the theme before the first paint so a light page never flashes dark */
+(function(){try{var t=localStorage.getItem("netstart-theme");if(!t){t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetStart — Learn computer networking from zero</title>
+<meta name="description" content="A calm, beginner-friendly course that turns networking jargon into short explanations, diagrams and practice.">
+<link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/style.css?v=20261106" rel="stylesheet">
+</head>
+<body data-page="home">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="HomePage.html">Net<span class="text-primary">Start</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="basics.html">Basics</a></li>
+        <li class="nav-item"><a class="nav-link" href="concepts.html">Core concepts</a></li>
+        <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" href="cheatsheet.html">Cheat sheet</a></li>
+        <li class="nav-item ms-lg-2">
+          <button class="btn btn-sm btn-outline-secondary" type="button" data-theme-toggle aria-pressed="false">
+            <span aria-hidden="true">☾</span><span class="visually-hidden">Switch theme</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="hero py-5">
+  <div class="container py-lg-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="badge badge-soft rounded-pill mb-3 px-3 py-2">Beginner friendly · no jargon</span>
+        <h1 class="display-4 mb-3 hero-title">Networks make sense once someone draws them.</h1>
+        <p class="lede mb-4">
+          NetStart is a short course for students who opened a networking textbook, met the OSI model,
+          and closed it again. Every idea is explained in plain language, sketched, and then tested
+          with a question you can actually get wrong.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <a class="btn btn-primary btn-lg px-4" href="basics.html">Start with the basics</a>
+          <a class="btn btn-outline-secondary btn-lg px-4" href="quiz.html">Test what I know</a>
+        </div>
+
+        <div class="mt-4" style="max-width: 26rem;">
+          <div class="d-flex justify-content-between small text-secondary mb-1">
+            <span data-progress-text>0 of 4 sections explored</span>
+            <span>progress</span>
+          </div>
+          <div class="progress" role="progressbar" aria-label="Course progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-bar" data-progress-bar style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item"><span class="stat" data-count="5">5</span><span class="stat-label">pages</span></div>
+          <div class="stat-item"><span class="stat" data-count="12">12</span><span class="stat-label">concepts</span></div>
+          <div class="stat-item"><span class="stat" data-count="8">8</span><span class="stat-label">quiz questions</span></div>
+          <div class="stat-item"><span class="stat" data-count="100" data-suffix="%">100%</span><span class="stat-label">offline</span></div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-3 p-md-4 shadow-sm">
+          <svg viewBox="0 0 520 340" role="img" aria-label="Diagram: a laptop connects through a router and the internet to a web server" class="w-100">
+            <defs>
+              <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L9,4.5 L0,9 z" fill="#0f7c8c"></path>
+              </marker>
+            </defs>
+            <rect x="20" y="120" width="110" height="76" rx="10" fill="#e2f2f4" stroke="#0f7c8c" stroke-width="2"></rect>
+            <text x="75" y="152" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#10212e">Your laptop</text>
+            <text x="75" y="172" text-anchor="middle" font-family="Consolas" font-size="12" fill="#44586a">192.168.1.10</text>
+
+            <rect x="200" y="120" width="110" height="76" rx="10" fill="#ffffff" stroke="#0f7c8c" stroke-width="2"></rect>
+            <text x="255" y="152" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#10212e">Router</text>
+            <text x="255" y="172" text-anchor="middle" font-family="Consolas" font-size="12" fill="#44586a">192.168.1.1</text>
+
+            <ellipse class="flow-slow" cx="390" cy="158" rx="80" ry="52" fill="#f7fafc" stroke="#0f7c8c" stroke-width="2" stroke-dasharray="6 4"></ellipse>
+            <text x="390" y="152" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#10212e">The internet</text>
+            <text x="390" y="172" text-anchor="middle" font-family="Segoe UI" font-size="12" fill="#44586a">many networks</text>
+
+            <rect x="320" y="250" width="140" height="60" rx="10" fill="#e2f2f4" stroke="#0f7c8c" stroke-width="2"></rect>
+            <text x="390" y="276" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#10212e">Web server</text>
+            <text x="390" y="296" text-anchor="middle" font-family="Consolas" font-size="12" fill="#44586a">203.0.113.9</text>
+
+            <line x1="130" y1="158" x2="196" y2="158" stroke="#0f7c8c" stroke-width="2" marker-end="url(#arrow)"></line>
+            <line class="flow" x1="390" y1="212" x2="390" y2="246" stroke="#0f7c8c" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"></line>
+            <text x="397" y="232" font-family="Segoe UI" font-size="11" fill="#44586a">DNS + route</text>
+
+            <!-- A request travelling down the path. Hidden for anyone who has
+                 asked the operating system to reduce motion. -->
+            <g class="motion" aria-hidden="true">
+              <circle class="packet" r="4.5" fill="#0f7c8c">
+                <animateMotion dur="1.8s" repeatCount="indefinite" path="M130,158 L196,158"></animateMotion>
+              </circle>
+              <circle class="packet" r="4.5" fill="#0f7c8c">
+                <animateMotion dur="1.8s" begin="0.6s" repeatCount="indefinite" path="M312,158 L466,158"></animateMotion>
+              </circle>
+              <circle class="packet" r="4.5" fill="#0f7c8c">
+                <animateMotion dur="1.8s" begin="1.2s" repeatCount="indefinite" path="M390,212 L390,246"></animateMotion>
+              </circle>
+            </g>
+          </svg>
+          <p class="small text-secondary mb-0 mt-2">
+            One request touches four things: your device, the local router, a DNS lookup and the server.
+            The course walks that path layer by layer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-lg-5">
+          <h2 class="section-title h3">Why another networking site?</h2>
+          <p class="lede">
+            Most sites open with a wall of acronyms and end with a certification pitch. NetStart goes the
+            other way: one idea per screen, a drawing for each, and a question you can actually get wrong.
+          </p>
+        </div>
+        <div class="col-12 col-lg-7">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="card h-100 p-3">
+                <h3 class="h6 fw-semibold mb-1">Short, not shallow</h3>
+                <p class="small text-secondary mb-0">One idea per card, with the detail a click away.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card h-100 p-3">
+                <h3 class="h6 fw-semibold mb-1">Drawings first</h3>
+                <p class="small text-secondary mb-0">Layers, paths and ranges are shown, not described.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card h-100 p-3">
+                <h3 class="h6 fw-semibold mb-1">Practice that counts</h3>
+                <p class="small text-secondary mb-0">Every quiz answer is explained, and your best score is kept.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card h-100 p-3">
+                <h3 class="h6 fw-semibold mb-1">Calm reading</h3>
+                <p class="small text-secondary mb-0">Quiet palette, generous spacing, dark mode for late revision.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 bg-white border-top border-bottom" style="background: var(--surface) !important;">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+        <div>
+          <h2 class="section-title h3 mb-1">Four ways in</h2>
+          <p class="text-secondary mb-0">Pick the one that matches what you need right now.</p>
+        </div>
+        <span class="small text-secondary" data-progress-text>0 of 4 sections explored</span>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-3">
+          <a class="text-decoration-none" href="basics.html">
+            <div class="card card-hover h-100 p-4">
+              <div class="card-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge badge-soft rounded-pill">01</span>
+                <span class="small text-secondary" data-progress-dot="basics">not yet visited</span>
+              </div>
+              <h3 class="h5 fw-semibold text-body">Network basics</h3>
+              <p class="small text-secondary mb-0">What a network is, what a packet looks like, and the OSI model without the ceremony.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <a class="text-decoration-none" href="concepts.html">
+            <div class="card card-hover h-100 p-4">
+              <div class="card-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge badge-soft rounded-pill">02</span>
+                <span class="small text-secondary" data-progress-dot="concepts">not yet visited</span>
+              </div>
+              <h3 class="h5 fw-semibold text-body">Core concepts</h3>
+              <p class="small text-secondary mb-0">IP, TCP and UDP, DNS, DHCP, NAT, ports. Searchable, filterable, with a subnet calculator.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <a class="text-decoration-none" href="quiz.html">
+            <div class="card card-hover h-100 p-4">
+              <div class="card-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge badge-soft rounded-pill">03</span>
+                <span class="small text-secondary" data-progress-dot="quiz">not yet visited</span>
+              </div>
+              <h3 class="h5 fw-semibold text-body">Quick quiz</h3>
+              <p class="small text-secondary mb-0">Eight questions, instant explanations, a score worth keeping.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <a class="text-decoration-none" href="cheatsheet.html">
+            <div class="card card-hover h-100 p-4">
+              <div class="card-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></div>
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge badge-soft rounded-pill">04</span>
+                <span class="small text-secondary" data-progress-dot="cheatsheet">not yet visited</span>
+              </div>
+              <h3 class="h5 fw-semibold text-body">Cheat sheet</h3>
+              <p class="small text-secondary mb-0">The night-before page: ports, ranges, layer names and commands, printable.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <h2 class="section-title h3">Built for the week before the exam</h2>
+          <p class="lede mb-3">
+            The site keeps a local record of what you have opened and how you scored. It never sends
+            anything anywhere: the whole progress state lives in your browser.
+          </p>
+          <ul class="list-unstyled small mb-0">
+            <li class="mb-2">✓ <span class="text-secondary">Progress survives a refresh and works offline once the page is loaded.</span></li>
+            <li class="mb-2">✓ <span class="text-secondary">Keyboard friendly: cards, quiz options and theme toggle all reachable with Tab.</span></li>
+            <li>✓ <span class="text-secondary">Print styles strip the interface so the cheat sheet fits on paper.</span></li>
+          </ul>
+        </div>
+        <div class="col-lg-5">
+          <div class="callout">
+            <p class="mb-1 small fw-semibold">Study order that works</p>
+            <p class="mb-0 small text-secondary">
+              Read the basics once, skim the concepts, take the quiz and note what you missed,
+              then read only the cheat-sheet rows behind those misses.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-wrap justify-content-between gap-2 small">
+    <span>NetStart — an HCI coursework prototype. No tracking, no accounts.</span>
+    <span><a href="https://getbootstrap.com/" target="_blank" rel="noopener">Built with Bootstrap 5</a></span>
+  </div>
+</footer>
+
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js?v=20261106"></script>
+</body>
+</html>
+

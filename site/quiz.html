@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<script>/* Set the theme before the first paint so a light page never flashes dark */
+(function(){try{var t=localStorage.getItem("netstart-theme");if(!t){t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick quiz — NetStart</title>
+<meta name="description" content="Eight questions on networking fundamentals, with an explanation after every answer and a score kept locally.">
+<link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/style.css?v=20261106" rel="stylesheet">
+</head>
+<body data-page="quiz">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="HomePage.html">Net<span class="text-primary">Start</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="basics.html">Basics</a></li>
+        <li class="nav-item"><a class="nav-link" href="concepts.html">Core concepts</a></li>
+        <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" href="cheatsheet.html">Cheat sheet</a></li>
+        <li class="nav-item ms-lg-2">
+          <button class="btn btn-sm btn-outline-secondary" type="button" data-theme-toggle aria-pressed="false">
+            <span aria-hidden="true">☾</span><span class="visually-hidden">Switch theme</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="py-5 border-bottom" style="background: var(--surface);">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="small mb-2"><a href="HomePage.html">Home</a> <span class="text-secondary">/ Quiz</span></nav>
+    <h1 class="section-title display-6 mb-2">Quick quiz</h1>
+    <p class="lede mb-0">Eight questions. Each answer is explained, whether you get it right or not.</p>
+  </div>
+</header>
+
+<main id="main" class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <aside class="col-lg-4">
+        <div class="card p-4">
+          <p class="small text-secondary mb-1">Progress</p>
+          <p class="h5 mb-0" id="quizCounter">Question 1 of 8</p>
+          <p class="small text-secondary mb-3">Networking fundamentals</p>
+          <div class="progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-bar" id="quizBar" style="width:0%"></div>
+          </div>
+          <hr class="my-3">
+          <p class="small text-secondary mb-0">
+            One correct option per question. Your first click is final, and the score is kept in this browser.
+          </p>
+        </div>
+      </aside>
+
+      <div class="col-lg-8">
+
+        <div id="quizRoot">
+          <div class="card p-4">
+            <h2 class="h5 mb-4" id="quizQuestion">Loading…</h2>
+            <div id="quizOptions"></div>
+            <div id="quizFeedback" class="mt-3 small" role="status" aria-live="polite"></div>
+            <div class="d-flex justify-content-end mt-4">
+              <button class="btn btn-primary px-4" id="quizNext" type="button" disabled>Next question</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="quizResult" class="card p-4 d-none" aria-live="polite">
+          <h2 class="h4 mb-1">Result</h2>
+          <div id="resultBadge" class="result-badge d-none">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Excellent work</span>
+          </div>
+          <p class="text-secondary mb-4">Saved locally, so you can close the tab and come back.</p>
+
+          <div class="d-flex align-items-baseline gap-2 mb-1">
+            <span class="display-5 fw-semibold" id="resultScore">0 / 8</span>
+            <span class="text-secondary" id="resultPct">0%</span>
+          </div>
+          <div class="progress mb-3" role="progressbar" aria-label="Score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-bar" id="resultBar" style="width:0%"></div>
+          </div>
+
+          <p class="mb-4" id="resultMsg"></p>
+
+          <div id="resultRecap" class="mt-2 mb-3"></div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-primary" id="quizRestart" type="button">Try again</button>
+            <a class="btn btn-outline-secondary" href="cheatsheet.html">Open the cheat sheet</a>
+            <a class="btn btn-outline-secondary" href="concepts.html">Back to concepts</a>
+          </div>
+        </div>
+
+        <div class="callout mt-4 small">
+          <strong>How this quiz is scored.</strong> Each question has one correct option. Your first click is final
+          for that question, the explanation then appears, and the score is stored in <span class="mono">localStorage</span>
+          under a NetStart key. Clearing site data resets it.
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-wrap justify-content-between gap-2 small">
+    <span>NetStart — an HCI coursework prototype. No tracking, no accounts.</span>
+    <span><a href="https://getbootstrap.com/" target="_blank" rel="noopener">Built with Bootstrap 5</a></span>
+  </div>
+</footer>
+
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js?v=20261106"></script>
+</body>
+</html>
+

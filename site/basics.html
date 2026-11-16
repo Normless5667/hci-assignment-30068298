@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<script>
+(function(){try{var t=localStorage.getItem("netstart-theme");if(!t){t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Network basics — NetStart</title>
+<meta name="description" content="What a network is, how data is packaged, and the seven OSI layers explained in plain language.">
+<link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/style.css?v=20261106" rel="stylesheet">
+</head>
+<body data-page="basics">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="HomePage.html">Net<span class="text-primary">Start</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="basics.html">Basics</a></li>
+        <li class="nav-item"><a class="nav-link" href="concepts.html">Core concepts</a></li>
+        <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" href="cheatsheet.html">Cheat sheet</a></li>
+        <li class="nav-item ms-lg-2">
+          <button class="btn btn-sm btn-outline-secondary" type="button" data-theme-toggle aria-pressed="false">
+            <span aria-hidden="true">☾</span><span class="visually-hidden">Switch theme</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="py-5 border-bottom" style="background: var(--surface);">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="small mb-2"><a href="HomePage.html">Home</a> <span class="text-secondary">/ Basics</span></nav>
+    <h1 class="section-title display-6 mb-2">Network basics</h1>
+    <p class="lede mb-0">Three ideas carry most of networking: things have addresses, data travels in pieces, and each piece is handled in layers.</p>
+  </div>
+</header>
+
+<main id="main" class="py-5">
+  <div class="container">
+
+    <section class="mb-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h2 class="h4 section-title">1. A network is a delivery agreement</h2>
+        </div>
+        <div class="col-lg-8">
+          <p><strong>Two computers are on the same network when they can exchange data without a human carrying it.</strong></p>
+          <details class="detail-more">
+            <summary>More detail</summary>
+            <p>
+              That requires three things to be agreed on: how to find each other (addressing), how to hand
+              data over (a link), and how to recover when something is lost (the protocol).
+            </p>
+            <div class="callout small">
+              <strong>Address vs. name.</strong> Humans use names such as <span class="mono">example.com</span>;
+              networks route to addresses such as <span class="mono">203.0.113.9</span>. DNS is the translator,
+              and it is the first thing that happens when you open a page.
+            </div>
+          </details>
+
+          <figure class="figure">
+            <svg viewBox="0 28 660 158" role="img" aria-label="A DNS lookup: your laptop asks the resolver, the resolver asks the name server, and the address comes back">
+              <line class="fig-line flow" x1="150" y1="70" x2="252" y2="70" marker-end="url(#fig-arrow)"></line>
+              <line class="fig-line flow" x1="408" y1="70" x2="510" y2="70" marker-end="url(#fig-arrow)"></line>
+              <line class="fig-line flow-slow" x1="510" y1="118" x2="408" y2="118" marker-end="url(#fig-arrow)"></line>
+              <line class="fig-line flow-slow" x1="252" y1="118" x2="150" y2="118" marker-end="url(#fig-arrow)"></line>
+
+              <rect class="fig-box" x="20" y="46" width="130" height="96" rx="10"></rect>
+              <text class="fig-ink" x="85" y="82" text-anchor="middle" font-size="14">Your laptop</text>
+              <text class="fig-soft mono" x="85" y="104" text-anchor="middle" font-size="11">192.168.1.10</text>
+              <text class="fig-soft" x="85" y="126" text-anchor="middle" font-size="10">asks by name</text>
+
+              <rect class="fig-box" x="252" y="46" width="156" height="96" rx="10"></rect>
+              <text class="fig-ink" x="330" y="82" text-anchor="middle" font-size="14">Resolver</text>
+              <text class="fig-soft" x="330" y="104" text-anchor="middle" font-size="11">your ISP or 1.1.1.1</text>
+              <text class="fig-soft" x="330" y="126" text-anchor="middle" font-size="10">knows where to ask</text>
+
+              <rect class="fig-box fig-box-accent" x="510" y="46" width="130" height="96" rx="10"></rect>
+              <text class="fig-ink" x="575" y="82" text-anchor="middle" font-size="14">Name server</text>
+              <text class="fig-soft" x="575" y="104" text-anchor="middle" font-size="11">for example.com</text>
+              <text class="fig-soft" x="575" y="126" text-anchor="middle" font-size="10">holds the address</text>
+
+              <text class="fig-soft mono" x="200" y="58" text-anchor="middle" font-size="10">example.com?</text>
+              <text class="fig-soft mono" x="460" y="58" text-anchor="middle" font-size="10">example.com?</text>
+              <text class="fig-accent mono" x="460" y="140" text-anchor="middle" font-size="10">203.0.113.9</text>
+              <text class="fig-accent mono" x="200" y="140" text-anchor="middle" font-size="10">203.0.113.9</text>
+
+              <g class="motion" aria-hidden="true">
+                <circle class="packet" r="4" fill="currentColor">
+                  <animateMotion dur="2.4s" repeatCount="indefinite" path="M150,70 L252,70 M408,70 L510,70"></animateMotion>
+                </circle>
+              </g>
+
+              <defs>
+                <marker id="fig-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="currentColor"></path>
+                </marker>
+              </defs>
+            </svg>
+            <figcaption>You ask by name, the resolver asks on your behalf, and an address comes back. That round trip happens before a single byte of the page is requested.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h2 class="h4 section-title">2. Data travels in packets</h2>
+        </div>
+        <div class="col-lg-8">
+          <p><strong>A message is cut into packets, and each packet carries its own addressing.</strong></p>
+          <details class="detail-more">
+            <summary>More detail</summary>
+            <p>
+              Each packet carries a header with where it came from, where it is going, and its place in the
+              sequence. Packets can arrive out of order, by different routes, or not at all; the protocol
+              above decides what to do about that.
+            </p>
+          </details>
+
+          <figure class="figure">
+            <svg viewBox="0 0 660 264" role="img" aria-label="One message inside four wrappers: Ethernet header, IP header, TCP header, then the payload, with a trailer at the end">
+              <rect class="fig-box" x="24" y="24" width="612" height="66" rx="10"></rect>
+              <text class="fig-ink" x="44" y="50" font-size="13">Ethernet</text>
+              <text class="fig-soft" x="130" y="50" font-size="11">next hop only — changes at every router</text>
+
+              <rect class="fig-box" x="56" y="70" width="548" height="66" rx="10"></rect>
+              <text class="fig-ink" x="76" y="96" font-size="13">IP</text>
+              <text class="fig-soft" x="110" y="96" font-size="11">source and destination address — survives the whole trip</text>
+
+              <rect class="fig-box" x="88" y="116" width="484" height="66" rx="10"></rect>
+              <text class="fig-ink" x="108" y="142" font-size="13">TCP / UDP</text>
+              <text class="fig-soft" x="196" y="142" font-size="11">ports, order, retransmission</text>
+
+              <rect class="fig-box fig-box-accent" x="120" y="162" width="420" height="60" rx="10"></rect>
+              <text class="fig-ink" x="140" y="188" font-size="13">Your data</text>
+              <text class="fig-soft" x="216" y="188" font-size="11">the part the application actually asked for</text>
+
+              <text class="fig-soft" x="44" y="248" font-size="11">Trailer: a checksum at the end, so a corrupted packet can be thrown away instead of trusted.</text>
+            </svg>
+            <figcaption>Encapsulation: each layer wraps the one before it. The address a router reads and the address the application cares about are not the same thing.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h2 class="h4 section-title">3. The OSI model, without the ceremony</h2>
+          <p class="small text-secondary">
+            <strong>Seven names, one purpose: to say which problem is being solved right now.</strong>
+            Click a layer.
+          </p>
+
+          <figure class="figure">
+            <svg viewBox="0 0 300 292" role="img" aria-label="The seven OSI layers drawn as a staircase, layer 3 highlighted">
+              <rect class="fig-box" x="18"  y="8"   width="264" height="34" rx="6"></rect>
+              <text class="fig-ink"  x="32" y="30" font-size="12">7 · Application</text>
+
+              <rect class="fig-box" x="30"  y="48"  width="240" height="34" rx="6"></rect>
+              <text class="fig-ink"  x="44" y="70" font-size="12">6 · Presentation</text>
+
+              <rect class="fig-box" x="42"  y="88"  width="216" height="34" rx="6"></rect>
+              <text class="fig-ink"  x="56" y="110" font-size="12">5 · Session</text>
+
+              <rect class="fig-box" x="54"  y="128" width="192" height="34" rx="6"></rect>
+              <text class="fig-ink"  x="68" y="150" font-size="12">4 · Transport</text>
+
+              <rect class="fig-box fig-box-accent" x="66" y="168" width="168" height="34" rx="6"></rect>
+              <text class="fig-ink"  x="80" y="190" font-size="12">3 · Network</text>
+
+              <rect class="fig-box" x="78"  y="208" width="144" height="34" rx="6"></rect>
+              <text class="fig-ink"  x="92" y="230" font-size="12">2 · Data link</text>
+
+              <rect class="fig-box" x="90"  y="248" width="120" height="34" rx="6"></rect>
+              <text class="fig-ink"  x="104" y="270" font-size="12">1 · Physical</text>
+            </svg>
+            <figcaption>Higher layers are what the user asked for; lower layers are what the wire carries. Layer 3 is where routing lives.</figcaption>
+          </figure>
+        </div>
+        <div class="col-lg-8">
+          <div class="row g-3">
+            <div class="col-md-5">
+              <div class="nav flex-column layer-tabs gap-2" role="tablist" aria-label="OSI layers">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#layer7" type="button" role="tab" aria-controls="layer7" aria-selected="true">
+                  <span class="fw-semibold">7 · Application</span><br><span class="small">what the user asked for</span>
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#layer6" type="button" role="tab" aria-controls="layer6" aria-selected="false">
+                  <span class="fw-semibold">6 · Presentation</span><br><span class="small">format and encoding</span>
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#layer5" type="button" role="tab" aria-controls="layer5" aria-selected="false">
+                  <span class="fw-semibold">5 · Session</span><br><span class="small">who is talking to whom</span>
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#layer4" type="button" role="tab" aria-controls="layer4" aria-selected="false">
+                  <span class="fw-semibold">4 · Transport</span><br><span class="small">reliability and ports</span>
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#layer3" type="button" role="tab" aria-controls="layer3" aria-selected="false">
+                  <span class="fw-semibold">3 · Network</span><br><span class="small">routing between networks</span>
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#layer2" type="button" role="tab" aria-controls="layer2" aria-selected="false">
+                  <span class="fw-semibold">2 · Data link</span><br><span class="small">the next hop only</span>
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#layer1" type="button" role="tab" aria-controls="layer1" aria-selected="false">
+                  <span class="fw-semibold">1 · Physical</span><br><span class="small">cable, radio, light</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-7">
+              <div class="tab-content card p-4 h-100">
+                <div class="tab-pane fade show active" id="layer7" role="tabpanel">
+                  <h3 class="h5">Application</h3>
+                  <p class="mb-2">The protocols your software speaks: HTTP for pages, SMTP for mail, DNS for names.</p>
+                  <p class="small text-secondary mb-0"><strong>Fails as:</strong> a 404, a certificate warning, wrong credentials. The network is fine; the conversation is not.</p>
+                </div>
+                <div class="tab-pane fade" id="layer6" role="tabpanel">
+                  <h3 class="h5">Presentation</h3>
+                  <p class="mb-2">Turns bytes into something both ends understand: UTF-8, JPEG, TLS record framing, compression.</p>
+                  <p class="small text-secondary mb-0"><strong>Fails as:</strong> garbled characters, an image that renders as noise, a decryption error.</p>
+                </div>
+                <div class="tab-pane fade" id="layer5" role="tabpanel">
+                  <h3 class="h5">Session</h3>
+                  <p class="mb-2">Keeps track of a conversation: start it, keep it alive, end it. Cookies and TLS sessions live near here.</p>
+                  <p class="small text-secondary mb-0"><strong>Fails as:</strong> being logged out on every request, or a connection that times out mid-transfer.</p>
+                </div>
+                <div class="tab-pane fade" id="layer4" role="tabpanel">
+                  <h3 class="h5">Transport</h3>
+                  <p class="mb-2">TCP numbers the pieces and re-sends what is lost; UDP just sends. Ports decide which program on the host receives the data.</p>
+                  <p class="small text-secondary mb-0"><strong>Fails as:</strong> a page that loads halfway, or a "connection refused" when nothing listens on that port.</p>
+                </div>
+                <div class="tab-pane fade" id="layer3" role="tabpanel">
+                  <h3 class="h5">Network</h3>
+                  <p class="mb-2">IP addresses and routing. This layer answers one question: which interface does this packet leave by, to get closer to the destination?</p>
+                  <p class="small text-secondary mb-0"><strong>Fails as:</strong> "destination host unreachable", or a ping that works while the web page does not.</p>
+                </div>
+                <div class="tab-pane fade" id="layer2" role="tabpanel">
+                  <h3 class="h5">Data link</h3>
+                  <p class="mb-2">Moves a frame to the next device on the same link, using MAC addresses, switches and Wi-Fi frames.</p>
+                  <p class="small text-secondary mb-0"><strong>Fails as:</strong> a switch loop, duplicate frames, or a device that is plugged in but never appears.</p>
+                </div>
+                <div class="tab-pane fade" id="layer1" role="tabpanel">
+                  <h3 class="h5">Physical</h3>
+                  <p class="mb-2">Voltage, radio, light. The part that is genuinely a cable problem.</p>
+                  <p class="small text-secondary mb-0"><strong>Fails as:</strong> no link light at all, or intermittent drops when someone bumps the connector.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-3 p-md-4 mt-3">
+            <h3 class="h6 fw-semibold">Layers in practice</h3>
+            <p class="small text-secondary mb-2">
+              The internet does not really use seven strict layers. It uses four: link, internet, transport
+              and application. The OSI names survive because they are a useful vocabulary for arguing about
+              where a fault is.
+            </p>
+            <div class="table-responsive">
+              <table class="table table-sm cheat mb-0">
+                <thead><tr><th>Problem you see</th><th>Layer worth checking first</th></tr></thead>
+                <tbody>
+                  <tr><td>Nothing works, no link light</td><td>Physical</td></tr>
+                  <tr><td>Only one machine affected</td><td>Data link / IP configuration</td></tr>
+                  <tr><td>Ping works, browsing fails</td><td>Transport or application (ports, DNS)</td></tr>
+                  <tr><td>Works on Wi-Fi, not on cable</td><td>Data link, then routing</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h2 class="h4 section-title">4. Follow one request</h2>
+        </div>
+        <div class="col-lg-8">
+          <div class="stepper card p-3 p-md-4" id="requestStepper">
+            <div class="stepper-track" aria-hidden="false">
+              <div class="stepper-node is-active" data-node="laptop">
+                <strong>Laptop</strong>
+                <span class="mono">192.168.1.10</span>
+              </div>
+              <div class="stepper-link" aria-hidden="true"></div>
+              <div class="stepper-node" data-node="router">
+                <strong>Router</strong>
+                <span>default gateway</span>
+              </div>
+              <div class="stepper-link" aria-hidden="true"></div>
+              <div class="stepper-node" data-node="internet">
+                <strong>The internet</strong>
+                <span>many networks</span>
+              </div>
+              <div class="stepper-link" aria-hidden="true"></div>
+              <div class="stepper-node" data-node="server">
+                <strong>Web server</strong>
+                <span class="mono">:443</span>
+              </div>
+            </div>
+
+            <div class="stepper-panel">
+              <p class="mb-1 small" aria-hidden="true"><span id="stepDots" class="stepper-dots">● ○ ○ ○ ○</span></p>
+              <p class="mb-1 fw-semibold" id="stepTitle">1 · DNS lookup</p>
+              <p class="small text-secondary mb-0" id="stepText" role="status" aria-live="polite">
+                Your resolver asks for the address of the name you typed. Nothing has been sent to the server yet.
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-between mt-3">
+              <button class="btn btn-outline-secondary btn-sm" id="stepPrev" type="button" disabled>← Back</button>
+              <button class="btn btn-primary btn-sm px-3" id="stepNext" type="button">Next step →</button>
+            </div>
+          </div>
+
+          <noscript>
+            <ol class="list-group list-group-numbered">
+              <li class="list-group-item"><strong>DNS lookup.</strong> Your resolver asks for the address of the name you typed.</li>
+              <li class="list-group-item"><strong>Routing decision.</strong> The packet's destination is outside your subnet, so it goes to the default gateway.</li>
+              <li class="list-group-item"><strong>NAT.</strong> The router rewrites your private source address to its public one and remembers the mapping.</li>
+              <li class="list-group-item"><strong>Transport.</strong> A TCP handshake opens a connection to the server's port 443.</li>
+              <li class="list-group-item"><strong>The way back.</strong> The reply is matched to the mapping and forwarded to your machine.</li>
+            </ol>
+          </noscript>
+          <p class="small text-secondary mt-3 mb-0">
+            Next: the <a href="concepts.html">core concepts</a> page gives each of those words a card of its own,
+            and the <a href="quiz.html">quiz</a> checks whether the order stuck.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="d-flex justify-content-between border-top pt-4">
+      <a class="btn btn-outline-secondary" href="HomePage.html">← Home</a>
+      <a class="btn btn-primary" href="concepts.html">Core concepts →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-wrap justify-content-between gap-2 small">
+    <span>NetStart — an HCI coursework prototype. No tracking, no accounts.</span>
+    <span><a href="https://getbootstrap.com/" target="_blank" rel="noopener">Built with Bootstrap 5</a></span>
+  </div>
+</footer>
+
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js?v=20261106"></script>
+</body>
+</html>

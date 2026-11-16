@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<script>/* Set the theme before the first paint so a light page never flashes dark */
+(function(){try{var t=localStorage.getItem("netstart-theme");if(!t){t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Core concepts — NetStart</title>
+<meta name="description" content="Searchable cards for IP, TCP, UDP, DNS, DHCP, NAT, ports and more, plus a subnet calculator.">
+<link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/style.css?v=20261106" rel="stylesheet">
+</head>
+<body data-page="concepts">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="HomePage.html">Net<span class="text-primary">Start</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="basics.html">Basics</a></li>
+        <li class="nav-item"><a class="nav-link" href="concepts.html">Core concepts</a></li>
+        <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" href="cheatsheet.html">Cheat sheet</a></li>
+        <li class="nav-item ms-lg-2">
+          <button class="btn btn-sm btn-outline-secondary" type="button" data-theme-toggle aria-pressed="false">
+            <span aria-hidden="true">☾</span><span class="visually-hidden">Switch theme</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="py-5 border-bottom" style="background: var(--surface);">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="small mb-2"><a href="HomePage.html">Home</a> <span class="text-secondary">/ Core concepts</span></nav>
+    <h1 class="section-title display-6 mb-2">Core concepts</h1>
+    <p class="lede mb-0">Twelve ideas, each on one card. Search by name, filter by kind, open only what you need.</p>
+  </div>
+</header>
+
+<main id="main" class="py-5">
+  <div class="container">
+
+    <div class="row g-3 align-items-center mb-4">
+      <div class="col-lg-5">
+        <label for="conceptSearch" class="form-label small fw-semibold">Search concepts</label>
+        <input type="search" id="conceptSearch" class="form-control search-box" placeholder="Try “port”, “dns”, “private”…" autocomplete="off">
+      </div>
+      <div class="col-lg-7">
+        <div class="small fw-semibold mb-2">Filter</div>
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-sm btn-outline-secondary active" data-filter="all" type="button">All</button>
+          <button class="btn btn-sm btn-outline-secondary" data-filter="addressing" type="button">Addressing</button>
+          <button class="btn btn-sm btn-outline-secondary" data-filter="transport" type="button">Transport</button>
+          <button class="btn btn-sm btn-outline-secondary" data-filter="naming" type="button">Naming &amp; config</button>
+          <button class="btn btn-sm btn-outline-secondary" data-filter="devices" type="button">Devices</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="small text-secondary" id="conceptCount" aria-live="polite">12 of 12 concepts shown</p>
+
+    <div class="row g-3" id="conceptGrid">
+
+      <div class="col-md-6" data-concept="ip address packet addressing" data-tags="addressing">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">IP address</h2>
+                <p class="small text-secondary mb-0">The address a packet is routed to.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>IPv4 is 32 bits written as four numbers, <span class="mono">192.168.1.10</span>. IPv6 is 128 bits in hex.</p>
+            <p class="mb-1"><strong>Private ranges</strong> (never routed on the public internet):</p>
+            <ul class="mb-2">
+              <li><span class="mono">10.0.0.0/8</span></li>
+              <li><span class="mono">172.16.0.0/12</span></li>
+              <li><span class="mono">192.168.0.0/16</span></li>
+            </ul>
+            <p class="mb-0">A host also needs a mask (how much of the address is network) and a gateway (where to send everything else).</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="subnet mask cidr prefix addressing" data-tags="addressing">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h9"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">Subnet mask &amp; CIDR</h2>
+                <p class="small text-secondary mb-0">How the network is cut into ranges.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p><span class="mono">/24</span> means the first 24 bits are the network, leaving 8 bits for hosts: 254 usable addresses.</p>
+            <p class="mb-2"><span class="mono">/25</span> splits a /24 into two halves of 126. That is the whole trick behind subnetting.</p>
+            <p class="mb-0">Try the calculator below: it accepts an address and a prefix and prints the network, mask and usable range.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="tcp transport handshake reliable" data-tags="transport">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">TCP</h2>
+                <p class="small text-secondary mb-0">Reliable, ordered delivery.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>TCP opens a connection with a three-way handshake: SYN, SYN-ACK, ACK. Every segment is numbered and acknowledged.</p>
+            <p class="mb-0">Lost segments are re-sent, and the receiver reorders what arrived late. That costs latency, which is why real-time voice uses UDP instead.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="udp transport datagram fast" data-tags="transport">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">UDP</h2>
+                <p class="small text-secondary mb-0">Send and forget.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>No handshake, no acknowledgements, no ordering. A datagram either arrives or it does not.</p>
+            <p class="mb-0">Used by DNS, DHCP, VoIP and games, where a late packet is worse than a lost one.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="dns name resolution domain naming" data-tags="naming">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">DNS</h2>
+                <p class="small text-secondary mb-0">Names to addresses.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>Your device asks a resolver; the resolver walks the hierarchy from the root, through the top-level domain, to the authoritative server.</p>
+            <p class="mb-0">Answers are cached for a TTL. That is why a DNS change can take hours to reach everyone.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="dhcp automatic address lease config" data-tags="naming">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">DHCP</h2>
+                <p class="small text-secondary mb-0">Hands out addresses automatically.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>A new device broadcasts a request; the server replies with an address, mask, gateway and DNS servers, leased for a fixed time.</p>
+            <p class="mb-0">Without DHCP, every address has to be typed in by hand, and one typo takes a machine off the network.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="nat translation router private public" data-tags="addressing devices">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">NAT</h2>
+                <p class="small text-secondary mb-0">Many private devices, one public address.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>The router rewrites the source address and port of outgoing packets, then reverses the mapping for replies.</p>
+            <p class="mb-0">Side effect: an unsolicited connection from outside cannot reach a device behind NAT unless a port forward exists.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="ports socket numbers services transport" data-tags="transport">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">Ports</h2>
+                <p class="small text-secondary mb-0">Which program on the machine.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>A port is a number in the transport header. The pair (address, port) identifies one service on one host.</p>
+            <p class="mb-2">Well-known examples:</p>
+            <p class="mb-0 mono">22 SSH · 53 DNS · 80 HTTP · 443 HTTPS · 3306 MySQL</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="mac address switch data link layer2" data-tags="devices addressing">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">MAC address</h2>
+                <p class="small text-secondary mb-0">Identity on one link only.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>Six bytes burned into the network card, used by switches to forward a frame to the right port.</p>
+            <p class="mb-0">A MAC does not survive a router: each hop replaces it. IP addresses survive end to end; MAC addresses do not.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="router switch hub devices forwarding" data-tags="devices">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">Router vs. switch</h2>
+                <p class="small text-secondary mb-0">Two different jobs, often confused.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>A switch forwards frames inside one network using MAC addresses. A router forwards packets between networks using IP addresses.</p>
+            <p class="mb-0">A home "router" is three devices in one box: switch, router and wireless access point.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="https tls encryption http application" data-tags="naming">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">HTTP &amp; HTTPS</h2>
+                <p class="small text-secondary mb-0">The request/response pair behind the web.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>HTTP is text: a method, a path, headers, maybe a body, then a status code back. It is stateless, so cookies carry continuity.</p>
+            <p class="mb-0">HTTPS is HTTP inside TLS: the certificate proves the server's identity, and the traffic is encrypted and tamper-evident.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6" data-concept="latency bandwidth throughput performance" data-tags="transport">
+        <article class="card concept-card h-100 p-3">
+          <button class="concept-head btn btn-link text-start text-decoration-none p-0 w-100" aria-expanded="false">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div class="d-flex align-items-start gap-2">
+                <span class="concept-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l3.5-3.5"/><path d="M20.3 15a8.5 8.5 0 1 0-16.6 0"/><circle cx="12" cy="15" r="1"/></svg></span>
+                <div>
+                <h2 class="h5 mb-1">Latency vs. bandwidth</h2>
+                <p class="small text-secondary mb-0">Why a fast link still feels slow.</p>
+              </div>
+              <span class="chev text-secondary" aria-hidden="true">›</span>
+            </div>
+          </button>
+          <div class="concept-body mt-3 small">
+            <p>Bandwidth is how much can be in flight; latency is how long one round trip takes. A 4K video needs bandwidth. A video call needs low latency.</p>
+            <p class="mb-0">TCP makes latency matter more: every lost segment waits for a round trip before it is re-sent.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <section class="mt-5">
+      <div class="card p-3 p-md-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-5">
+            <h2 class="h4 section-title mb-2">Subnet calculator</h2>
+            <p class="small text-secondary mb-3">
+              Type an address and a prefix. The page works out the network, mask and usable range in the browser —
+              nothing is sent anywhere.
+            </p>
+            <form id="cidrForm" class="d-flex gap-2">
+              <label class="visually-hidden" for="cidrInput">Address and prefix</label>
+              <input id="cidrInput" class="form-control mono" value="192.168.1.10/24" inputmode="numeric" spellcheck="false">
+              <button class="btn btn-primary" type="submit">Calculate</button>
+            </form>
+          </div>
+          <div class="col-lg-7">
+            <div id="cidrResult" class="card p-3" style="background: var(--paper);"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="d-flex justify-content-between border-top pt-4 mt-5">
+      <a class="btn btn-outline-secondary" href="basics.html">← Basics</a>
+      <a class="btn btn-primary" href="quiz.html">Take the quiz →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-wrap justify-content-between gap-2 small">
+    <span>NetStart — an HCI coursework prototype. No tracking, no accounts.</span>
+    <span><a href="https://getbootstrap.com/" target="_blank" rel="noopener">Built with Bootstrap 5</a></span>
+  </div>
+</footer>
+
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js?v=20261106"></script>
+</body>
+</html>
+
